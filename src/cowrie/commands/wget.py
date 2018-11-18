@@ -57,7 +57,7 @@ class command_wget(HoneyPotCommand):
 
     def start(self):
         try:
-            optlist, args = getopt.getopt(self.args, 'cqO:P:', 'header=')
+            optlist, args = getopt.getopt(self.args, 'cqO:P:', ['header=', 'quiet'])
         except getopt.GetoptError:
             self.errorWrite('Unrecognized option\n')
             self.exit()
@@ -77,7 +77,7 @@ class command_wget(HoneyPotCommand):
         for opt in optlist:
             if opt[0] == '-O':
                 outfile = opt[1]
-            if opt[0] == '-q':
+            if opt[0] == '-q' or opt[0] == '--quiet':
                 self.quiet = True
 
         # for some reason getopt doesn't recognize "-O -"
