@@ -25,7 +25,7 @@ class command_curl(HoneyPotCommand):
 
     def start(self):
         try:
-            optlist, args = getopt.getopt(self.args, 'sho:O', ['help', 'manual', 'silent'])
+            optlist, args = getopt.getopt(self.args, 'sho:O', ['help', 'manual', 'silent', 'output='])
         except getopt.GetoptError as err:
             # TODO: should be 'unknown' instead of 'not recognized'
             self.write("curl: {}\n".format(err))
@@ -54,7 +54,7 @@ class command_curl(HoneyPotCommand):
 
         outfile = None
         for opt in optlist:
-            if opt[0] == '-o':
+            if opt[0] == '-o' or opt[0] == '--output':
                 outfile = opt[1]
             if opt[0] == '-O':
                 outfile = urldata.path.split('/')[-1]
